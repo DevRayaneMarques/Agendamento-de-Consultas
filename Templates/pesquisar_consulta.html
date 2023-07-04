@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agenda de Consultas</title>
+</head>
+<body>
+    <h1>Agenda de Consultas</h1>
+    <h2>Consulta de {{ consulta['nome'] }}</h2>
+    <p>Data: {{ consulta['data'] }}</p>
+    <p>Hora: {{ consulta['hora'] }}</p>
+    <p>Telefone: {{ consulta['telefone'] }}</p>
+    <br>
+    <form action="/" method="GET">
+        <input type="submit" value="Voltar ao Início">
+    </form>
+</body>
+</html>

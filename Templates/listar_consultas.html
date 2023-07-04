@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agenda de Consultas</title>
+</head>
+<body>
+    <h1>Agenda de Consultas</h1>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+        {% for nome, consulta in agenda.items() %}
+        <tr>
+            <td>{{ nome }}</td>
+            <td>{{ consulta['data'] }}</td>
+            <td>{{ consulta['hora'] }}</td>
+            <td>{{ consulta['telefone'] }}</td>
+            <td>
+                <form action="/remover_consulta" method="POST">
+                    <input type="hidden" name="nome" value="{{ nome }}">
+                    <input type="submit" value="Remover">
+                </form>
+                <form action="/atualizar_consulta" method="POST">
+                    <input type="hidden" name="nome" value="{{ nome }}">
+                    <label for="nova_data">Nova Data:</label>
+                    <input type="date" id="nova_data" name="nova_data"><br><br>
+                    <label for="nova_hora">Nova Hora:</label>
+                    <input type="time" id="nova_hora" name="nova_hora"><br><br>
+                    <input type="submit" value="Atualizar">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <form action="/" method="GET">
+        <input type="submit" value="Voltar ao Início">
+    </form>
+</body>
+</html>

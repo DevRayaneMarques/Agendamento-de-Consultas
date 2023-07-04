@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agenda de Consultas</title>
+</head>
+<body>
+    <h1>Agenda de Consultas</h1>
+    <form action="/adicionar_consulta" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome"><br><br>
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data"><br><br>
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora"><br><br>
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone"><br><br>
+        <input type="submit" value="Adicionar Consulta">
+    </form>
+    <br>
+    <form action="/listar_consultas" method="POST">
+        <input type="submit" value="Listar Consultas">
+    </form>
+</body>
+</html>
