@@ -9,7 +9,6 @@ agenda = {}
 def index():
     return render_template('index.html')
 
-
 @app.route('/adicionar_consulta', methods=['POST'])
 def adicionar_consulta():
     nome = request.form['nome']
@@ -20,11 +19,9 @@ def adicionar_consulta():
     agenda[nome] = consulta
     return render_template('index.html')
 
-
-@app.route('/listar_consultas')
+@app.route('/listar_consultas', methods=['POST'] )
 def listar_consultas():
-    with app.app_context():
-        return render_template('listar_consultas.html')
+    return render_template('listar_consultas.html', agenda=agenda)
 
 @app.route('/remover_consulta', methods=['POST'])
 def remover_consulta():
@@ -44,18 +41,21 @@ def atualizar_consulta():
         consulta["hora"] = nova_hora
     return render_template('index.html')
 
-@app.route('/pesquisar_consulta', methods=['POST'])
+@app.route('/pesquisar_consulta', methods=['GET', 'POST'])
 def pesquisar_consulta():
-    nome = request.form['nome']
-    consulta = None
-    for nome_agenda, consulta_agenda in agenda.items():
-        if nome_agenda.lower() == nome.lower():
-            consulta = consulta_agenda
-            break
-    if consulta:
-        return render_template('pesquisar_consulta.html', consulta=consulta)
+    if request.method == 'POST':
+        nome = request.form['nome']
+        consulta = None
+        for nome_agenda, consulta_agenda in agenda.items():
+            if nome_agenda.lower() == nome.lower():
+                consulta = consulta_agenda
+                break
+        if consulta:
+            return render_template('pesquisar_consulta.html', consulta=consulta)
+        else:
+            return render_template('nao_encontrado.html')
     else:
-        return render_template('nao_encontrado.html')
+        return render_template('pesquisar_consulta.html', consulta=None)
 
 if __name__ == '__main__':
     app.run(debug=True)
