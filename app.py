@@ -1,7 +1,4 @@
 from flask import Flask, render_template, request
-import datetime
-
-
 
 app = Flask(__name__)
 
@@ -17,11 +14,23 @@ def adicionar_consulta():
     data = request.form['data']
     hora = request.form['hora']
     telefone = request.form['telefone']
-    consulta = {"nome": nome, "data": data, "hora": hora, "telefone": telefone}
+    categoria = request.form['categoria']
+    medico = request.form['medico']
+
+    consulta = {
+        'nome': nome,
+        'data': data,
+        'hora': hora,
+        'telefone': telefone,
+        'categoria': categoria,
+        'medico': medico
+    }
+
     agenda[nome] = consulta
+
     return render_template('index.html')
 
-@app.route('/listar_consultas', methods=['POST'] )
+@app.route('/listar_consultas', methods=['POST'])
 def listar_consultas():
     return render_template('listar_consultas.html', agenda=agenda)
 
