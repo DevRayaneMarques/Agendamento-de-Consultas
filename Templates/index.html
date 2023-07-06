@@ -2,23 +2,79 @@
 <html>
 <head>
     <title>Agenda de Consultas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.0ab40f84e194451a6123d7585f019c69?rik=6tp2Q6MKfcqHBw&pid=ImgRaw&r=0');
+            background-size: cover;
+        }
+        .card {
+            margin: 50px auto;
+            width: 400px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Agenda de Consultas</h1>
-    <form action="/adicionar_consulta" method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome"><br><br>
-        <label for="data">Data:</label>
-        <input type="date" id="data" name="data"><br><br>
-        <label for="hora">Hora:</label>
-        <input type="time" id="hora" name="hora"><br><br>
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" name="telefone"><br><br>
-        <input type="submit" value="Adicionar Consulta">
-    </form>
-    <br>
-    <form action="/listar_consultas" method="POST">
-        <input type="submit" value="Listar Consultas">
-    </form>
+    <div class="card">
+        <h1>Agenda de Consultas</h1>
+        <form action="/adicionar_consulta" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora" name="hora" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" class="form-control">
+            </div>
+            <input type="submit" value="Adicionar Consulta" class="btn btn-primary">
+        </form>
+        <br>
+        <form action="/listar_consultas" method="POST">
+            <input type="submit" value="Listar Consultas" class="btn btn-primary">
+        </form>
+        <br>
+        <form action="/pesquisar_consulta" method="POST">
+            <div class="form-group">
+                <label for="nome">Pesquisar Consulta:</label>
+                <input type="text" id="nome" name="nome" class="form-control">
+            </div>
+            <input type="submit" value="Pesquisar" class="btn btn-primary">
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

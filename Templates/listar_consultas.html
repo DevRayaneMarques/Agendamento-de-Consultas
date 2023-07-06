@@ -2,6 +2,52 @@
 <html>
 <head>
     <title>Agenda de Consultas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: rgb(178, 158, 133);
+            background-size: cover;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Agenda de Consultas</h1>
@@ -15,22 +61,26 @@
         </tr>
         {% for nome, consulta in agenda.items() %}
         <tr>
-            <td>{{ nome }}</td>
+            <td>{{ consulta['nome'] }}</td>
             <td>{{ consulta['data'] }}</td>
             <td>{{ consulta['hora'] }}</td>
             <td>{{ consulta['telefone'] }}</td>
             <td>
                 <form action="/remover_consulta" method="POST">
                     <input type="hidden" name="nome" value="{{ nome }}">
-                    <input type="submit" value="Remover">
+                    <input type="submit" value="Remover" class="btn btn-danger">
                 </form>
                 <form action="/atualizar_consulta" method="POST">
                     <input type="hidden" name="nome" value="{{ nome }}">
-                    <label for="nova_data">Nova Data:</label>
-                    <input type="date" id="nova_data" name="nova_data"><br><br>
-                    <label for="nova_hora">Nova Hora:</label>
-                    <input type="time" id="nova_hora" name="nova_hora"><br><br>
-                    <input type="submit" value="Atualizar">
+                    <div class="form-group">
+                        <label for="nova_data">Nova Data:</label>
+                        <input type="date" id="nova_data" name="nova_data" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="nova_hora">Nova Hora:</label>
+                        <input type="time" id="nova_hora" name="nova_hora" class="form-control">
+                    </div>
+                    <input type="submit" value="Atualizar" class="btn btn-primary">
                 </form>
             </td>
         </tr>
@@ -38,7 +88,11 @@
     </table>
     <br>
     <form action="/" method="GET">
-        <input type="submit" value="Voltar ao Início">
+        <input type="submit" value="Voltar ao Início" class="btn btn-primary">
     </form>
-</body>
-</html>
+    <br>
+    <form action="/pesquisar_consulta" method="GET">
+        <div class="form-group">
+            <label for="nome">Pesquisar Consulta por Nome:</label>
+            <input type="text" id="nome" name="nome" class="form-control">
+        </div>
